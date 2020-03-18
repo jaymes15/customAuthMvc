@@ -1,0 +1,53 @@
+﻿@model AuthMvc.ViewModels.EditRoleViewModel
+
+@{
+    ViewBag.Title = "Edit Roles";
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" class="form-control" disabled />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoleName"></label>
+        <input asp-for="RoleName" class="form-control" />
+        <span asp-validation-for="RoleName" class="text-danger"></span>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">
+        Edit Role
+    </button>
+    <a class="btn btn-primary" asp-area="" asp-controller="Administration" asp-action="ListRoles">Cancel</a>
+</form>
+<br/>
+
+@if (Model.Users.Any()) { 
+<a class="btn btn-warning" asp-area="" asp-controller="Administration" asp-action="EditUsersInRole" Asp-route-roleId="@Model.Id">
+    Add or Remove Users
+</a>
+
+
+@foreach (var user in Model.Users)
+{
+    <div class="card">
+        <div class="card-header">
+            Users in this Role
+        </div>
+        <div class="card-body">
+            User Name:@user
+        </div>
+    </div>
+
+
+}
+}
+else
+{
+<h4>No Users In this Role</h4>
+<a class="btn btn-warning" asp-area="" asp-controller="Administration" asp-action="EditUsersInRole" Asp-route-roleId="@Model.Id">Add or Remove Users</a>
+}

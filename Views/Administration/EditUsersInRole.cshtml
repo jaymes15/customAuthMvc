@@ -1,0 +1,33 @@
+﻿@model List<AuthMvc.ViewModels.UserRoleViewModel>
+
+@{
+    var roleId = ViewBag.roleId;
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <input asp-for="@roleId" type="hidden" />
+            @for (int i = 0; i < Model.Count; i++)
+            {
+
+                <input asp-for="@Model[i].UserId" type="hidden" />
+                <input asp-for="@Model[i].UserName" type="hidden" />
+                <div class="form-check m-1">
+                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                        @Model[i].UserName
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input class="btn btn-primary" asp-area=""  type="submit" value="Update" />
+            <a class="btn btn-primary" asp-area="" asp-controller="Administration" asp-action="ListRoles">Cancel</a>
+        </div>
+    </div>
+
+</form>
